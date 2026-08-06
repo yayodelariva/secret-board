@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const pool = require("../config/pool");
 const { validationResult } = require("express-validator");
 
@@ -28,10 +29,13 @@ async function createSignup(req, res) {
       return res.status(400).json({ error: "Username already exists" });
     }
 
-    // Insert the new user into the database
+    //Hash the password before storing it in the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert the new user and hashed password into the database
     await pool.query(
       "INSERT INTO users (username, password_hash) VALUES ($1, $2)",
-      [username, password],
+      [username, hashedPassword],
     );
 
     res.redirect("/login");
@@ -42,7 +46,10 @@ async function createSignup(req, res) {
 }
 
 async function renderLogin(req, res) {
-  res.render("login");
+  res.render("login", {
+    errors: {},
+    oldInput: {},
+  });
 }
 
 module.exports = {
