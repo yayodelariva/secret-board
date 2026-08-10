@@ -4,6 +4,7 @@ const {
   signupValidation,
   loginValidation,
 } = require("../validators/authValidator");
+const ensureAuthenticated = require("../middleware/authMiddleware");
 const validationMiddleware = require("../middleware/validation");
 const router = Router();
 const secretboardController = require("../controllers/secretboardControllers");
@@ -22,9 +23,26 @@ router.post(
   loginValidation,
   validationMiddleware("login"),
   passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/dashboard",
     failureRedirect: "/login",
   }),
 );
+
+router.get("/dashboard", ensureAuthenticated, (req, res) => {
+  console.log(req.user);
+  res.render("dashboard", {
+    user: req.user,
+  });
+});
+
+router.get("/test-auth", (req, res) => {
+  console.log("REQ.USER:", req.user);
+  console.log("AUTHENTICATED:", req.isAuthenticated());
+
+  res.json({
+    authenticated: req.isAuthenticated(),
+    user: req.user || null,
+  });
+});
 
 module.exports = router;

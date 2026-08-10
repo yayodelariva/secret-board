@@ -34,17 +34,23 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
+  console.log("SERIALIZE USER:", user);
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
+  console.log("DESERIALIZE ID:", id);
+
   try {
     const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
       id,
     ]);
 
+    console.log("DESERIALIZE ROWS:", rows);
+
     done(null, rows[0]);
   } catch (err) {
+    console.error("DESERIALIZE ERROR:", err);
     done(err);
   }
 });

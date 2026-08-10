@@ -7,7 +7,10 @@ async function renderHomepage(req, res) {
 }
 
 async function renderSignup(req, res) {
-  res.render("signup");
+  res.render("signup", {
+    errors: {},
+    oldInput: {},
+  });
 }
 
 async function createSignup(req, res) {

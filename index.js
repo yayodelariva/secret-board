@@ -12,6 +12,7 @@ const secretboardRouter = require("./routes/secretboardRoutes");
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +24,7 @@ app.use(sessionConfig());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Finally your routes
+// Routes
 app.use("/", secretboardRouter);
 
 const PORT = 3000;

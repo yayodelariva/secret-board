@@ -7,50 +7,54 @@
   integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
   crossorigin="anonymous"
 />
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
   </head>
   <body>
-    <h1>Login</h1>
-    <form action="/login" method="POST">
-      <!-- Username field with validation feedback -->
-      <div class="mb-3">
-        <label for="username">Username:</label>
-<input
-  type="text"
-  name="username"
-  class="form-control <%= errors.username ? 'is-invalid' : '' %>"
-  value="<%= oldInput.username || '' %>"
->
-
-<% if (errors.username) { %>
-  <div class="invalid-feedback">
-    <%= errors.username.msg %>
-  </div>
-<% } %>
+    <a href="/">Back to homepage</a>
+    <div class="loginContainer">
+      <h1>Login</h1>
+      <div class="loginForm">
+        <form action="/login" method="POST">
+          <!-- Username field with validation feedback -->
+          <div class="mb-3">
+            <label for="username">Username:</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control <%= errors.username ? 'is-invalid' : '' %>"
+          value="<%= oldInput.username || '' %>"
+        >
+      
+        <% if (errors.username) { %>
+          <div class="invalid-feedback">
+        <%= errors.username.msg %>
+          </div>
+        <% } %>
+          </div>
+          <br />
+          <!-- // Password field with validation feedback -->
+        <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input
+            type="password"
+            name="password"
+          class="form-control <%= errors.password ? 'is-invalid' : '' %>"
+        >
+      
+        <% if (errors.password) { %>
+          <div class="invalid-feedback">
+        <%= errors.password.msg %>
+          </div>
+        <% } %>
+      
+        </div>
+          <br />
+          <button type="submit">Login</button>
+        </form>
       </div>
-      <br />
-      <!-- // Password field with validation feedback -->
-<div class="mb-3 loginForm">
-
-    <label class="form-label">Password</label>
-
-    <input
-        type="password"
-        name="password"
-  class="form-control <%= errors.password ? 'is-invalid' : '' %>"
-    >
-
-<% if (errors.password) { %>
-  <div class="invalid-feedback">
-    <%= errors.password.msg %>
-  </div>
-<% } %>
-
-</div>
-      <br />
-      <button type="submit">Login</button>
-    </form>
+    </div>
   </body>
 </html>

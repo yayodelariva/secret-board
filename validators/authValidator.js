@@ -6,7 +6,8 @@ exports.signupValidation = [
     .isLength({ min: 3, max: 20 })
     .withMessage("Username must be between 3 and 20 characters long")
     .isAlphanumeric()
-    .withMessage("Username must contain only letters and numbers"),
+    .withMessage("Username must contain only letters and numbers")
+    .toLowerCase(),
   body("password")
     .isStrongPassword({
       minLength: 6,
