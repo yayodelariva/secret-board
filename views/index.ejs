@@ -12,5 +12,19 @@
       <li><a href="/login">log-in</a></li>
       <li><a href="/dashboard">dashboard</a></li>
     </ul>
+    <div class="message-board">
+      <h2>Latest Posts</h2>
+
+<% posts.forEach(post => { %>
+  <article>
+    <p><%= post.message %></p>
+
+    <small>
+      Posted by <%= post.username %>
+      on <%= post.created_at.toLocaleString() %>
+    </small>
+  </article>
+<% }) %>
+    </div>
   </body>
 </html>

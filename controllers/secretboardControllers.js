@@ -2,9 +2,27 @@ const bcrypt = require("bcryptjs");
 const pool = require("../config/pool");
 const { validationResult } = require("express-validator");
 
-async function renderHomepage(req, res) {
-  res.render("index");
-}
+const renderHomepage = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT 
+        messages.id,
+        messages.message,
+        messages.created_at,
+        users.username
+      FROM messages
+      JOIN users ON messages.user_id = users.id
+      ORDER BY messages.created_at DESC
+    `);
+
+    res.render("index", {
+      posts: result.rows,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error loading posts");
+  }
+};
 
 async function renderSignup(req, res) {
   res.render("signup", {
@@ -55,9 +73,32 @@ async function renderLogin(req, res) {
   });
 }
 
+const createPost = async (req, res) => {
+  const { message } = req.body;
+  const userId = req.user.id;
+
+  if (!message || message.trim() === "") {
+    return res.status(400).send("Post cannot be empty");
+  }
+
+  try {
+    await pool.query(
+      `INSERT INTO messages (message, user_id)
+       VALUES ($1, $2)`,
+      [message.trim(), userId],
+    );
+
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error creating post");
+  }
+};
+
 module.exports = {
   renderHomepage,
   renderSignup,
   renderLogin,
   createSignup,
+  createPost,
 };

@@ -7,9 +7,24 @@
   </head>
   <body>
     <h1>Welcome, <%= user.username %>!</h1>
-    <form action="/logout" method="POST">
-      <button type="submit" class="btn btn-danger">Log out</button>
-    </form>
-    <a href="/">Home</a>
+    <nav>
+      <form action="/logout" method="POST">
+        <button type="submit" class="btn btn-danger">Log out</button>
+      </form>
+      <a href="/">Home</a>
+    </nav>
+    <div>
+      <form action="/posts" method="POST">
+        <label for="post-content">Create a post</label>
+        <textarea
+          style="resize: none"
+          id="post-content"
+          name="message"
+          rows="4"
+          cols="50"
+        ></textarea>
+        <button type="submit">Post</button>
+      </form>
+    </div>
   </body>
 </html>

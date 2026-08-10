@@ -8,8 +8,13 @@ const ensureAuthenticated = require("../middleware/authMiddleware");
 const validationMiddleware = require("../middleware/validation");
 const router = Router();
 const secretboardController = require("../controllers/secretboardControllers");
+const {
+  createPost,
+  renderHomepage,
+} = require("../controllers/secretboardControllers");
 
 router.get("/", secretboardController.renderHomepage);
+router.post("/posts", ensureAuthenticated, createPost);
 router.get("/signup", secretboardController.renderSignup);
 router.post(
   "/signup",
@@ -54,5 +59,7 @@ router.post("/logout", (req, res, next) => {
     res.redirect("/login");
   });
 });
+
+router.post("/posts", ensureAuthenticated, createPost);
 
 module.exports = router;
