@@ -7,7 +7,9 @@
   </head>
   <body>
     <h1>Welcome, <%= user.username %>!</h1>
-    <a href="/logout">Logout</a>
+    <form action="/logout" method="POST">
+      <button type="submit" class="btn btn-danger">Log out</button>
+    </form>
     <a href="/">Home</a>
   </body>
 </html>

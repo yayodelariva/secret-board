@@ -45,4 +45,14 @@ router.get("/test-auth", (req, res) => {
   });
 });
 
+router.post("/logout", (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+
+    res.redirect("/login");
+  });
+});
+
 module.exports = router;
