@@ -8,11 +8,18 @@
   </head>
   <body>
     <h1>Secret Board</h1>
-    <ul>
-      <li><a href="/signup">sign-up</a></li>
-      <li><a href="/login">log-in</a></li>
-      <li><a href="/dashboard">dashboard</a></li>
-    </ul>
+<nav class="navbar">
+  <% if (isAuthenticated) { %>
+    <a href="/dashboard">Dashboard</a>
+
+    <form action="/logout" method="POST">
+      <button type="submit">Log Out</button>
+    </form>
+  <% } else { %>
+    <a href="/signup">Sign Up</a>
+    <a href="/login">Log In</a>
+  <% } %>
+</nav>
     <div class="message-board">
       <h2>Latest Posts</h2>
 
