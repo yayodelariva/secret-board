@@ -5,7 +5,7 @@ const { validationResult } = require("express-validator");
 const renderHomepage = async (req, res) => {
   try {
     const result = await pool.query(`
-      SELECT 
+      SELECT
         messages.id,
         messages.message,
         messages.created_at,
@@ -18,6 +18,8 @@ const renderHomepage = async (req, res) => {
     res.render("index", {
       posts: result.rows,
       isAuthenticated: req.isAuthenticated(),
+      isMember: req.user?.is_member || false,
+      isAdmin: req.user?.is_admin || false,
     });
   } catch (error) {
     console.error(error);
@@ -96,10 +98,28 @@ const createPost = async (req, res) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  if (!req.user.is_admin) {
+    return res.status(403).send("You are not authorized to delete posts");
+  }
+
+  const { id } = req.params;
+
+  try {
+    await pool.query("DELETE FROM messages WHERE id = $1", [id]);
+
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error deleting post");
+  }
+};
+
 module.exports = {
   renderHomepage,
   renderSignup,
   renderLogin,
   createSignup,
   createPost,
+  deletePost,
 };

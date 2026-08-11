@@ -27,16 +27,21 @@
       </form>
     </div>
     <div>
-      <form action="/posts" method="POST">
-        <label for="post-content">Become a member</label>
-        <input
-          style="width: 300px"
-          type="text"
-          name="membercode"
-          placeholder="find the 4 digit code somewhere in the site!"
-        />
-        <button type="submit">Redeem</button>
-      </form>
+<% if (is_member) { %>
+  <p>You are a member.</p>
+<% } else { %>
+  <form action="/membership" method="POST">
+    <label for="membership-code">Become a member</label>
+    <input
+      type="text"
+      id="membership-code"
+      name="membership-code"
+      maxlength="4"
+      required
+    />
+    <button type="submit">Become a member</button>
+  </form>
+<% } %>
     </div>
   </body>
 </html>

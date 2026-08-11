@@ -11,6 +11,7 @@ const secretboardController = require("../controllers/secretboardControllers");
 const {
   createPost,
   renderHomepage,
+  deletePost,
 } = require("../controllers/secretboardControllers");
 
 router.get("/", secretboardController.renderHomepage);
@@ -61,5 +62,7 @@ router.post("/logout", (req, res, next) => {
 });
 
 router.post("/posts", ensureAuthenticated, createPost);
+
+router.post("/posts/:id/delete", ensureAuthenticated, deletePost);
 
 module.exports = router;

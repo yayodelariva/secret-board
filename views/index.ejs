@@ -20,26 +20,37 @@
     <a href="/login">Log In</a>
   <% } %>
 </nav>
-    <div class="message-board">
-      <h2>Latest Posts</h2>
 
-<% posts.forEach(post => { %>
-  <article>
-    <p><%= post.message %></p>
+<div class="message-board">
+  <h2>Latest Posts</h2>
 
-<% if (isAuthenticated) { %>
-  <small>
-    Posted by <%= post.username %>
-    on <%= post.created_at.toLocaleString() %>
-  </small>
-<% } else { %>
-  <small class="hidden-info">
-    Posted by: <div class="hidden-user">&nbsp;hidden&nbsp;</div>
-    on <div class="hidden-date">&nbsp;6/66/666, 6:66:66 PM </div>
-  </small>
-<% } %>
-  </article>
-<% }) %>
-    </div>
+  <% posts.forEach(post => { %>
+    <article>
+      <p><%= post.message %></p>
+
+      <% if (isAuthenticated && isMember) { %>
+        <small>
+          Posted by <%= post.username %>
+          on <%= post.created_at.toLocaleString() %>
+        </small>
+      <% } else { %>
+        <small class="hidden-info">
+          Posted by:
+          <div class="hidden-user">&nbsp;hidden&nbsp;</div>
+          on
+          <div class="hidden-date">&nbsp;6/66/666, 6:66:66 PM</div>
+        </small>
+      <% } %>
+
+      <% if (isAdmin) { %>
+        <form action="/posts/<%= post.id %>/delete" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+      <% } %>
+    </article>
+  <% }) %>
+</div>
+
+
   </body>
 </html>
