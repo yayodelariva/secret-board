@@ -27,11 +27,12 @@
       </form>
     </div>
     <div>
-<% if (is_member) { %>
-  <p>You are a member.</p>
+<% if (user.membership_status) { %>
+  <p>You are a member. You can now see usernames and dates!</p>
 <% } else { %>
   <form action="/membership" method="POST">
     <label for="membership-code">Become a member</label>
+
     <input
       type="text"
       id="membership-code"
@@ -39,6 +40,7 @@
       maxlength="4"
       required
     />
+
     <button type="submit">Become a member</button>
   </form>
 <% } %>

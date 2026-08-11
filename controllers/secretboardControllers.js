@@ -18,7 +18,7 @@ const renderHomepage = async (req, res) => {
     res.render("index", {
       posts: result.rows,
       isAuthenticated: req.isAuthenticated(),
-      isMember: req.user?.is_member || false,
+      isMember: req.user?.membership_status || false,
       isAdmin: req.user?.is_admin || false,
     });
   } catch (error) {
@@ -114,6 +114,33 @@ const deletePost = async (req, res) => {
     res.status(500).send("Error deleting post");
   }
 };
+const becomeMember = async (req, res) => {
+  const { "membership-code": code } = req.body;
+
+  if (code !== "3304") {
+    return res.status(400).send("Invalid membership code");
+  }
+
+  try {
+    await pool.query(
+      `UPDATE users
+       SET membership_status = TRUE
+       WHERE id = $1`,
+      [req.user.id],
+    );
+
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error becoming a member");
+  }
+};
+
+const renderDashboard = (req, res) => {
+  res.render("dashboard", {
+    user: req.user,
+  });
+};
 
 module.exports = {
   renderHomepage,
@@ -122,4 +149,6 @@ module.exports = {
   createSignup,
   createPost,
   deletePost,
+  becomeMember,
+  renderDashboard,
 };

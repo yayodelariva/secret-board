@@ -12,6 +12,8 @@ const {
   createPost,
   renderHomepage,
   deletePost,
+  becomeMember,
+  renderDashboard,
 } = require("../controllers/secretboardControllers");
 
 router.get("/", secretboardController.renderHomepage);
@@ -34,12 +36,7 @@ router.post(
   }),
 );
 
-router.get("/dashboard", ensureAuthenticated, (req, res) => {
-  console.log(req.user);
-  res.render("dashboard", {
-    user: req.user,
-  });
-});
+router.get("/dashboard", ensureAuthenticated, renderDashboard);
 
 router.get("/test-auth", (req, res) => {
   console.log("REQ.USER:", req.user);
@@ -64,5 +61,7 @@ router.post("/logout", (req, res, next) => {
 router.post("/posts", ensureAuthenticated, createPost);
 
 router.post("/posts/:id/delete", ensureAuthenticated, deletePost);
+
+router.post("/membership", ensureAuthenticated, becomeMember);
 
 module.exports = router;
