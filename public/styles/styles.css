@@ -10,3 +10,10 @@
   justify-content: center;
   align-items: center;
 }
+.hidden-info {
+  display: flex;
+}
+.hidden-user,
+.hidden-date {
+  filter: blur(3px);
+}

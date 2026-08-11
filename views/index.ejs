@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="/styles/styles.css">
     <title>Homepage</title>
   </head>
   <body>
@@ -19,10 +20,17 @@
   <article>
     <p><%= post.message %></p>
 
-    <small>
-      Posted by <%= post.username %>
-      on <%= post.created_at.toLocaleString() %>
-    </small>
+<% if (isAuthenticated) { %>
+  <small>
+    Posted by <%= post.username %>
+    on <%= post.created_at.toLocaleString() %>
+  </small>
+<% } else { %>
+  <small class="hidden-info">
+    Posted by: <div class="hidden-user">&nbsp;hidden&nbsp;</div>
+    on <div class="hidden-date">&nbsp;6/66/666, 6:66:66 PM </div>
+  </small>
+<% } %>
   </article>
 <% }) %>
     </div>

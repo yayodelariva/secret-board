@@ -17,6 +17,7 @@ const renderHomepage = async (req, res) => {
 
     res.render("index", {
       posts: result.rows,
+      isAuthenticated: req.isAuthenticated(),
     });
   } catch (error) {
     console.error(error);
