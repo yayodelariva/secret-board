@@ -24,6 +24,12 @@ app.use(sessionConfig());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  res.locals.isAuth = req.isAuthenticated();
+  res.locals.user = req.user;
+  next();
+});
+
 // Routes
 app.use("/", secretboardRouter);
 
