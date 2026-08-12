@@ -19,8 +19,11 @@ exports.signupValidation = [
     .withMessage(
       "Password must be at least 6 characters long and include an uppercase letter, a lowercase letter, and a number.",
     ),
-  body("confirmPassword"),
-  // Custom validation to check if confirmPassword matches password
+  body("confirmPassword")
+    .custom((value, { req }) => {
+      return value === req.body.password;
+    })
+    .withMessage("Passwords do not match"),
 ];
 
 exports.loginValidation = [
