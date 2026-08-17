@@ -15,78 +15,67 @@
 
   <body>
             <%- include("partials/navbar") %>
-    <a href="/">Back to Home</a>
+
+  <div class="signupContainer">
+
     <h1>Sign up</h1>
 
-    <form action="/signup" method="POST">
-
-      <!-- Username -->
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-
-        <input
-          type="text"
-          id="username"
-          name="username"
-          class="form-control <%= errors.username ? 'is-invalid' : '' %>"
-          value="<%= oldInput.username || '' %>"
-          required
-        />
-
-        <% if (errors.username) { %>
-          <div class="invalid-feedback">
-            <%= errors.username.msg %>
-          </div>
-        <% } %>
-      </div>
-
-
-      <!-- Password -->
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="form-control <%= errors.password ? 'is-invalid' : '' %>"
-          required
-        />
-
-        <% if (errors.password) { %>
-          <div class="invalid-feedback">
-            <%= errors.password.msg %>
-          </div>
-        <% } %>
-      </div>
-
-
-      <!-- Confirm Password -->
-      <div class="mb-3">
-        <label for="confirmPassword" class="form-label">
-          Confirm Password
-        </label>
-
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          class="form-control <%= errors.confirmPassword ? 'is-invalid' : '' %>"
-          required
-        />
-
-        <% if (errors.confirmPassword) { %>
-          <div class="invalid-feedback">
-            <%= errors.confirmPassword.msg %>
-          </div>
-        <% } %>
-      </div>
-
-
-      <button type="submit" class="btn btn-primary">
-        Sign Up
-      </button>
-
-    </form>
+      <form action="/signup" method="POST">
+        <!-- Username -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control <%= errors.username ? 'is-invalid' : '' %>"
+            value="<%= oldInput.username || '' %>"
+            required
+          />
+          <% if (errors.username) { %>
+            <div class="invalid-feedback">
+              <%= errors.username.msg %>
+            </div>
+          <% } %>
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control <%= errors.password ? 'is-invalid' : '' %>"
+            required
+          />
+          <% if (errors.password) { %>
+            <div class="invalid-feedback">
+              <%= errors.password.msg %>
+            </div>
+          <% } %>
+        </div>
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            class="form-control <%= errors.confirmPassword ? 'is-invalid' : '' %>"
+            required
+          />
+          <% if (errors.confirmPassword) { %>
+            <div class="invalid-feedback">
+              <%= errors.confirmPassword.msg %>
+            </div>
+          <% } %>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Sign Up
+        </button>
+      </form>
+    </div>
   </body>
 </html>

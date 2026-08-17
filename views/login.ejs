@@ -14,14 +14,13 @@
   </head>
   <body>
             <%- include("partials/navbar") %>
-    <a href="/">Back to homepage</a>
     <div class="loginContainer">
       <h1>Login</h1>
       <div class="loginForm">
         <form action="/login" method="POST">
           <!-- Username field with validation feedback -->
           <div class="mb-3">
-            <label for="username">Username:</label>
+            <label class="form-label" for="username">Username:</label>
         <input
           type="text"
           name="username"
@@ -38,7 +37,7 @@
           <br />
           <!-- // Password field with validation feedback -->
         <div class="mb-3">
-        <label class="form-label">Password</label>
+        <label class="form-label">Password:</label>
         <input
             type="password"
             name="password"
@@ -53,7 +52,7 @@
       
         </div>
           <br />
-          <button type="submit">Login</button>
+          <button class="btn btn-primary" type="submit">Login</button>
         </form>
       </div>
     </div>
