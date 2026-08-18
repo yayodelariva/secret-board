@@ -4,6 +4,12 @@
   --bs-body-font-family: "Comfortaa", cursive;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #cee8ff;
 }
@@ -31,7 +37,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .loginContainer h1 {
   margin-bottom: 2rem;
@@ -40,9 +48,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+.loginForm form {
+  width: 100%;
+  max-width: 24rem;
 }
 .hidden-info {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 .hidden-user,
 .hidden-date {
@@ -56,37 +71,46 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .signupContainer h1 {
   margin-bottom: 2rem;
 }
 
+.signupContainer form {
+  width: 100%;
+  max-width: 24rem;
+}
+
 .signupForm {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 /* Index */
 .message-board-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
+  align-items: flex-start;
+  padding: 2rem 1rem;
 }
 .message-board {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  align-items: stretch;
+  padding: 2rem;
   border: 0.5px solid #6f6f70;
   border-radius: 6px;
-  padding-left: 8rem;
-  padding-right: 8rem;
+  width: 100%;
+  max-width: 48rem;
+}
+.message-board > h2 {
+  text-align: center;
 }
 .message-board > article {
   margin-top: 1rem;
@@ -96,6 +120,8 @@ body {
   background-color: #e2d7ff;
   border: 1px solid #8d57c2;
   border-radius: 6px;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .message-board > article > form > button {
@@ -106,6 +132,8 @@ body {
 .display-4 {
   padding-top: 1rem;
   padding-left: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 .form-section {
   background-color: #e2d7ff;
@@ -120,7 +148,8 @@ body {
 }
 
 .post-form textarea {
-  width: 30rem;
+  width: 100%;
+  max-width: 30rem;
   height: 100px;
   padding: 0.5rem;
   font-size: 1rem;
@@ -138,9 +167,25 @@ body {
   cursor: pointer;
 }
 
-#membership-code {
-  margin-top: 2rem;
-  width: 23rem;
+.membership-section {
+  padding: 1rem;
 }
 
-/* Login */
+#membership-code {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 23rem;
+}
+
+/* Small screens */
+@media (max-width: 576px) {
+  .form-section {
+    padding: 1.5rem 1rem;
+  }
+  .message-board {
+    padding: 1.5rem 1rem;
+  }
+  .post-form button {
+    width: 100%;
+  }
+}
